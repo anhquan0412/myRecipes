@@ -1,0 +1,82 @@
+$navbar-default-bg: #00FFFF;
+$light-orange: #FFD700;
+$navbar-default-color: $light-orange;
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+//design myRecipes button with id 'logo'
+#logo 
+{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: left;
+  margin-right: 20px;
+  margin-left: 10px;
+  font-size: 2em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover
+{
+  color: white;
+  text-decoration: none;
+}
+
+body
+{
+  padding-top: 80px;
+}
+
+.nav_item
+{
+  margin-left: 25px;
+  float: left;
+  margin-top: 20px;
+  
+}
+
+.center
+{
+  text-align:center;
+  
+}
+
+h1, h2, h3, h4 {
+  line-height: 1;
+}
+
+h1 
+{
+  font-size: 4em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2
+{
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #696969;
+}
+
+.left
+{
+  text-align: left;
+  letter-spacing: .5px;
+}
+
+.footer
+{
+  margin-top: 25px;
+  border-top: 1px solid #800000;
+  color: #DC143C;
+  
+}
