@@ -2,10 +2,14 @@ require 'test_helper'
 
 class RecipeTest < ActiveSupport::TestCase
   def setup
-    @chef = Chef.new(chefname: "Bob", email: "bob@something.com")
+    @chef = Chef.create(chefname: "Bob", email: "bob@something.com")
     @recipe = @chef.recipes.build(name: "Chicken Parm", summary: "This is the best recipe ever",
       description: "Bla bla bla heat oils eat chicken bla bla bla")
-    #if we just use recipe, recipe is a local variable and cannt not be used for other models
+    #if we just use recipe, recipe is a local variable and cannt not be used for other functions in here
+    #the @chef created in test file are in database as well but in sand-box mode, meaning it will be roll-back
+    # (delete from database) after the test is done.
+    
+    
     
   end
   
