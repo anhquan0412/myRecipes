@@ -104,3 +104,16 @@ input, textarea, select, .uneditable-input{ //those help allign the text box in 
 input{
   height: auto !important;
 }
+
+
+span.picture { //to edit the part of 'choose file to upload' in _form
+  margin-top: 10px;
+  input {
+    border:0;
+  }
+}
+
+
+.show_recipe { //to edit recipe's pictures on show.html.erb
+  margin: 10px 10px 10px 10px;
+}
