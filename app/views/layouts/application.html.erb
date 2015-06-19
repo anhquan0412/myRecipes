@@ -12,6 +12,9 @@
   <%= render 'layouts/navigation' %>
 
   <div class="container">
+    
+    <%= render 'layouts/messages' %>
+    
     <%= yield %> <!-- this line wraps any views in the views folder and "run" the views -->
     <%= render 'layouts/footer' %>
     

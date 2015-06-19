@@ -80,3 +80,27 @@ h2
   color: #DC143C;
   
 }
+
+.chef_info{
+  margin-top: 10px; //to move the chef pics down a little bit
+}
+
+.gravatar{
+  border-radius: 40px;
+}
+
+.well{
+  background-color: #EDEDED;
+}
+
+input, textarea, select, .uneditable-input{ //those help allign the text box in new.html.erb
+  border: 1px solid #d2d2d2;
+  border-radius: 5px; // to got a curve edge on the box
+  width: 100%;
+  margin-bottom: 15px;
+  
+}
+
+input{
+  height: auto !important;
+}
