@@ -1,5 +1,6 @@
 class Recipe < ActiveRecord::Base
   belongs_to :chef
+  has_many :likes
   validates :name, presence: true,
                     length: {minimum: 5, maximum: 60}
   validates :summary, presence: true, 
@@ -11,6 +12,21 @@ class Recipe < ActiveRecord::Base
   mount_uploader :picture, PictureUploader #PictureUploader is name of the class in picture_uploader.rb
   
   validate :picture_size #check pics size
+  
+  #order the recipe by update time
+  default_scope -> {order(updated_at: :desc)}
+  
+  
+  
+  #count number of likes
+  def thumbs_up_total
+    self.likes.where(like: true).size
+  end
+  
+  #count number of dislikes
+  def thumbs_down_total
+    self.likes.where(like: false).size
+  end
   
   
   private

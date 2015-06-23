@@ -18,6 +18,14 @@ Rails.application.routes.draw do
   
   
   #another way to get all the above standard routes
-  resources :recipes
+  resources :recipes do
+    # create a like path for a recipe
+    member do
+      post 'like'  
+    end
+  end
+  
+  
+  
   
 end

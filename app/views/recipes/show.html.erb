@@ -19,7 +19,26 @@
     
     <div class = "well">
       <strong>Step: </strong>
-      <p> <%=simple_format(@recipe.description) %></p> <!-- the simple_formal identifies and show string in new line (when you hit enter) -->
+      <p> 
+      <%=simple_format(@recipe.description) %>
+      </p> <!-- the simple_formal identifies and show string in new line (when you hit enter) -->
+      
+      <!-- LIKE BUTTON -->
+      <div class="pull-right">
+        <%= link_to like_recipe_path(@recipe, like: true), method: :post do %> <!-- without the method: :post, it will go the GET (home action) path. 
+        We want to CREATE a like, which is a POST action -->
+          <!-- create thumb up thumb down using twitter bootstrap from getbootstrap.com-->
+          <i class="glyphicon glyphicon-thumbs-up"></i> 
+        <% end %> 
+        &nbsp <%= @recipe.thumbs_up_total %>
+        &nbsp&nbsp&nbsp&nbsp <!-- create 4 spaces -->
+        
+        <%= link_to like_recipe_path(@recipe, like: false), method: :post do %>
+          <i class="glyphicon glyphicon-thumbs-down"></i>
+        <% end %>
+         &nbsp <%= @recipe.thumbs_down_total %>
+      </div>
+      
     </div>
     
   </div>

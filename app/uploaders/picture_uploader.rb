@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+#create this by typing: 	rails generate uploader Picture into console
 class PictureUploader < CarrierWave::Uploader::Base
 
 

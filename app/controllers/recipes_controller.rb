@@ -1,10 +1,15 @@
 class RecipesController < ApplicationController
   def index
-    @recipes = Recipe.all #this @recipes will be passed to index page of recipe
+     #  @recipes = Recipe.all.sort_by{ |likes| likes.thumbs_up_total}.reverse #sorting in descending order with number of thumbs up
+     #this @recipes will be passed to index page of recipe
+     #not a good idea, might cause performance issue when loading ALL recipes
+    
+    #using paginate
+    @recipes = Recipe.paginate(page: params[:page], per_page: 5) 
   end
   
   def show
-    #binding.pry to hold the server (when the user click on the link to show recipe, server is put on hold)
+    #binding.pry #to hold the server (when the user click on the link to show recipe, server is put on hold)
     @recipe = Recipe.find(params[:id])
   end
   
@@ -48,9 +53,35 @@ class RecipesController < ApplicationController
     end
   end
   
+  #define like method, THIS IS CONFUSING, PLS REVIEW MULTIPLE TIMES
+  def like
+    temp = params[:like]
+    @recipe = Recipe.find(params[:id])
+    like = Like.create(like: params[:like], chef: Chef.first, recipe: @recipe)
+    
+    if like.valid?
+    
+    #params[:like] would return true if thumb-up, false if thumb-down, this is passed here from show.html.erb
+      if temp == 'true'
+        flash[:success] = "You liked this recipe!"
+      else
+        flash[:success] = "You disliked this recipe!"
+      end
+      
+    else
+      flash[:danger] = "You already vote for this recipe!"
+    end
+    
+    redirect_to :back #because we have thumbs in index page and show page, we want the user to stay at that current page.
+  
+  end
   
   private
     def recipe_params
       params.require(:recipe).permit(:name, :summary, :description, :picture)
     end
+    
+    
+    
+    
 end

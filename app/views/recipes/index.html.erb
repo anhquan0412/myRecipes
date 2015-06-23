@@ -1,5 +1,10 @@
 <%= render 'shared/page_title', title: "All Recipes" %> <!-- remember to use double quote here for string? -->
 
+
+
+<!-- doing paginate, NEED AN INSTANT VARIABLE TO DO PAGINATE, in this case we have @recipes -->
+<%= will_paginate %>
+
 <% @recipes.each do |recipe| %>
   <div class='row'>
     
@@ -14,9 +19,27 @@
     <div class="col-lg-6 well">
       <h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
       <p><%= recipe.summary %></p>
+      
+       <!-- LIKE BUTTON -->
+      <div class="pull-right">
+        <%= link_to like_recipe_path(recipe,like: true), method: :post do %> <!-- without the method: :post, it will go the GET (home action) path. 
+        We want to CREATE a like, which is a POST action -->
+          <!-- create thumb up thumb down using twitter bootstrap from getbootstrap.com-->
+          <i class="glyphicon glyphicon-thumbs-up"></i> &nbsp <%= recipe.thumbs_up_total %>
+        <% end %> &nbsp&nbsp&nbsp&nbsp <!-- create 4 spaces -->
+        
+        <%= link_to like_recipe_path(recipe, like: false), method: :post do %>
+          <i class="glyphicon glyphicon-thumbs-down"></i> &nbsp <%= recipe.thumbs_down_total %>
+        <% end %>
+        
+      </div>
+      
+      
       <p>
         <span class='quiet'>
-          <small><%= time_ago_in_words(recipe.created_at) %> ago</small>
+          <small>Created at: <%= time_ago_in_words(recipe.created_at) %> ago. </small>
+          <small>Updated at: <%= time_ago_in_words(recipe.updated_at) %> ago</small>  
+          
         </span>
       </p>
     </div>
@@ -31,3 +54,8 @@
   <hr/>
 
 <% end %>
+
+
+
+<%= will_paginate %>
+<!-- page index at bottom of page ->
