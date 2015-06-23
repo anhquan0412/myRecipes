@@ -6,6 +6,7 @@ class RecipesController < ApplicationController
     
     #using paginate
     @recipes = Recipe.paginate(page: params[:page], per_page: 5) 
+    
   end
   
   def show
@@ -22,6 +23,10 @@ class RecipesController < ApplicationController
   #need strong parameter, need to process all the fields we submit by exclusively LIST them out as values so the apps can accept
   #need a private method
     @recipe = Recipe.new(recipe_params)
+    
+    #initialize likecount
+    @recipe.likecount = 0
+    
     
     #need a chef here, otherwise it will violate database integrity (chef_id must be present)
     #just temporary
@@ -63,6 +68,11 @@ class RecipesController < ApplicationController
     
     #params[:like] would return true if thumb-up, false if thumb-down, this is passed here from show.html.erb
       if temp == 'true'
+        #update likecount to database here
+        @recipe.likecount = @recipe.likecount + 1
+        #@recipe.likecount = @recipe.thumbs_up_total
+        @recipe.save
+        #
         flash[:success] = "You liked this recipe!"
       else
         flash[:success] = "You disliked this recipe!"

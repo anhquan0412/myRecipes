@@ -2,6 +2,7 @@ class Recipe < ActiveRecord::Base
   belongs_to :chef
   has_many :likes
   
+  
   validates :name, presence: true,
                     length: {minimum: 5, maximum: 60}
   validates :summary, presence: true, 
@@ -14,9 +15,13 @@ class Recipe < ActiveRecord::Base
   
   validate :picture_size #check pics size
   
-  #order the recipe by update time
-  default_scope -> {order(updated_at: :desc)}
   
+  #order the recipe by update time
+  #default_scope -> {order(updated_at: :desc)}
+  
+  
+  #order the recipe by upvote 
+  default_scope -> {order(likecount: :desc)}
   
   
   #count number of likes
@@ -28,7 +33,6 @@ class Recipe < ActiveRecord::Base
   def thumbs_down_total
     self.likes.where(like: false).size
   end
-  
   
   private
     def picture_size
