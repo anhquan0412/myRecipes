@@ -3,14 +3,17 @@
 
 <div class ="row">
   <div class ="col-md-4 pull-right center">
-    <%= gravatar_for @recipe.chef, size: 200 %>
+    <%= link_to gravatar_for(@recipe.chef, size: 200), chef_path(@recipe.chef) %>
     <p>
       <h5>Brought to you by <%= @recipe.chef.chefname %></h5>
     </p>
   </div>
-  
+    
   <div class = "col-md-8">
-    <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-success pull-right" %> 
+    <% if logged_in? && @recipe.chef == current_user %> <!-- if user is logged in and 
+    the chef we want to edit is the chef in our cookie -->
+      <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-success pull-right" %> 
+    <% end %>
     <h3> <%= @recipe.summary %></h3>
     
     <div class="show_recipe">
@@ -27,7 +30,7 @@
       <div class="pull-right">
         <%= link_to like_recipe_path(@recipe, like: true), method: :post do %> <!-- without the method: :post, it will go the GET (home action) path. 
         We want to CREATE a like, which is a POST action -->
-          <!-- create thumb up thumb down using twitter bootstrap from getbootstrap.com-->
+          <!-- create thumb up thumb down using twitter bootstrap -->
           <i class="glyphicon glyphicon-thumbs-up"></i> 
         <% end %> 
         &nbsp <%= @recipe.thumbs_up_total %>

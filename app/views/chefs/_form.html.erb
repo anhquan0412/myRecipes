@@ -1,0 +1,25 @@
+
+<%= render 'shared/error', obj: @chef %> <!-- passing @chef object in to 'obj' object in _error.html.erb -->
+
+<div class = "row">
+  <div class="well col-md-8 col-md-offset-2">
+    
+    
+    <%= form_for(@chef, html: { multipart: true}) do |f|%>
+      <%= f.label :chefname %>
+      <%= f.text_field :chefname %>
+      
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+      
+      <%= f.label :password %>
+      <%= f.password_field :password %> <!-- password_field: show the letter with dot -->
+      
+      
+      <%= f.submit(@chef.new_record? ? 'Register' : 'Edit Account', class: "btn btn-success")%>
+      <!-- ruby code: @chef.new_record? ? 1 : 0 ; if it is a new chef do 1, else 0 -->
+    <% end %>
+      
+  </div>
+</div>
+

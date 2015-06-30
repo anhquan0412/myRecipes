@@ -3,6 +3,7 @@
 
 
 <!-- doing paginate, NEED AN INSTANT VARIABLE TO DO PAGINATE, in this case we have @recipes -->
+<!-- don't have to pass instant variable into will_paginate because there is only 1 instant variable @recipes -->
 <%= will_paginate %>
 
 <% @recipes.each do |recipe| %>
@@ -11,7 +12,7 @@
     <!-- gravatar stuff below -->
     <div class = "col-md-2"> <!-- preserve 2 columns for image-->
       <section class = "chef_info center"> <!-- we change chef_info style in custom.css.scss in assets->stylesheets -->
-        <%= gravatar_for recipe.chef, size: 100 %> <!-- gravatar_for is defined in the application_helper.rb -->
+        <%= link_to gravatar_for(recipe.chef, size: 100), chef_path(recipe.chef) %> <!-- gravatar_for is defined in the application_helper.rb -->
         <h5><%=recipe.chef.chefname %></h5>
       </section>
     </div>

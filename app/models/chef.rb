@@ -10,9 +10,10 @@ class Chef < ActiveRecord::Base
   
   validates :email, presence: true,
                     length: {maximum: 105},
-                    #uniqueness: true ; if we do this, abc@a.com and ABC@a.com are different, but in fact they are not => have to ignore case sensiivity
+                    #uniqueness: true ; if we do this, abc@a.com and ABC@a.com are different, but in fact they are not => have to ignore case sensitivity
                     uniqueness: {case_sensitive: false},
                     format: { with: VALID_EMAIL_REGEX } 
                     
-                   
+  #password authentication
+  has_secure_password                
 end

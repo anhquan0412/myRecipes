@@ -1,0 +1,58 @@
+<%= render 'shared/page_title', title:"Chef: " + @chef.chefname %>
+
+
+<div class ="row">
+  <div class ="col-md-4 col-md-offset-4 center"> <!-- the col-md-offset skips the first 4 column and use the next 4. 'center' will align everything at the center -->
+    <%= gravatar_for @chef, size: 400 %>
+    <hr/>
+  </div>
+</div>
+
+<div class = "row">
+  <div class = "col-md-4 col-md-offset-4 center">
+    <h3><em>Recipes:</em></h3> <!-- 'em' for italic word' -->
+    <%= will_paginate @recipes %> <!-- we have to specify the instant variables here because this have 
+    2 instant variables: @chef and @recipes -->
+    
+    
+  </div>
+</div>
+
+
+
+<% @recipes.each do |recipe| %> <!-- normally we will do @chef.recipes.each 
+but we have an instant variable @recipes which is defined in show method of chef_controller -->
+  <div class = "row">
+    <div class="col-lg-6 well col-lg-offset-2">
+      <h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
+      <p><%= recipe.summary %></p>
+      
+       <!-- LIKE BUTTON -->
+      <div class="pull-right">
+        <%= link_to like_recipe_path(recipe,like: true), method: :post do %> 
+          <!-- create thumb up thumb down using twitter bootstrap from getbootstrap.com-->
+          <i class="glyphicon glyphicon-thumbs-up"></i> &nbsp <%= recipe.thumbs_up_total %>
+        <% end %> &nbsp&nbsp&nbsp&nbsp <!-- create 4 spaces -->
+        
+        <%= link_to like_recipe_path(recipe, like: false), method: :post do %>
+          <i class="glyphicon glyphicon-thumbs-down"></i> &nbsp <%= recipe.thumbs_down_total %>
+        <% end %>
+        
+      </div>
+      
+      
+      <p>
+        <span class='quiet'>
+          <small>Created at: <%= time_ago_in_words(recipe.created_at) %> ago. </small>
+          <small>Updated at: <%= time_ago_in_words(recipe.updated_at) %> ago</small>  
+          
+        </span>
+      </p>
+    </div>
+    
+    <!-- picture -->
+    <div class="col-md-4">
+      <%= image_tag(recipe.picture.url, size: "250x150", class: "gravatar") if recipe.picture? %> <!-- we can put the if part at the end, weird -->
+    </div>
+  </div>
+<% end %>

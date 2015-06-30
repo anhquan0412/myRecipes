@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'pages#home'
-  #get '/home', to: 'pages#home'
+  get '/home', to: 'pages#home'
   
   #get '/recipes', to: 'recipes#index'
   #get '/recipes/new', to: 'recipes#new', as: 'new_recipe' # the route will be: something.com/new_recipe
@@ -25,7 +25,16 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :chefs, except: [:new] #we want the URL to be  .../register, not .../new for new_chef
   
+  get '/register', to: 'chefs#new'
+  
+  #login -> new session
+  get '/login', to: "logins#new"
+  #logout -> close session
+  post '/login', to: "logins#create"
+  #post login -> create session
+  get '/logout', to: "logins#destroy"
   
   
 end

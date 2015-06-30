@@ -10,3 +10,9 @@ description: text
 - description must be present
 - description must be between 20 and 500
 - chef_id must be present 
+
+
+- Add passwords to chefs table to chef can be authenticated and logged in
+- Use email to log in credentials
+- Restrict action of create,edit and LIKE recipe to chef only
+

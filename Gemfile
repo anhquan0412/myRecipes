@@ -7,6 +7,7 @@ gem 'rails', '4.1.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 
+
 gem 'bootstrap-sass', '~> 3.3.4'
 
 # Use Uglifier as compressor for JavaScript assets
@@ -34,7 +35,7 @@ gem 'mini_magick', '3.8.0'
 gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -52,7 +53,7 @@ gem 'bootstrap-will_paginate', '0.0.10'
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  gem 'pry'
+  gem 'pry' #binding pry here babe
 end
 
 group :production do
