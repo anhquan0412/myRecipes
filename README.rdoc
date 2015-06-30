@@ -16,3 +16,5 @@ description: text
 - Use email to log in credentials
 - Restrict action of create,edit and LIKE recipe to chef only
 
+
+-TODO: in show.html.erb of chef, if a chef does not have any recipes, print "You have no recipe yet"

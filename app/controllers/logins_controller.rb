@@ -12,7 +12,7 @@ class LoginsController < ApplicationController
     if chef && chef.authenticate(params[:password])# if this chef exists in our database, and the passwords match
       session[:chef_id] = chef.id #take the chef.id and store it in our browser session COOKIE
       flash[:success] = "You are logged in"
-      redirect_to chef_path(chef.id)
+      redirect_to recipes_path
     else
       flash.now[:danger] = "Your email or password does not match" #using flash.now if you will render something later
       render 'new'
