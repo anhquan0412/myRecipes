@@ -1,4 +1,16 @@
 <%= render 'shared/page_title', title: "All Chefs" %> <!-- remember to use double quote here for string? -->
+
+<!-- doing tab -->
+<ul class = "nav nav-tabs">
+  <li>
+    <%= link_to "Recipes",recipes_path %>
+  </li>
+  <li class = 'active'> <!-- the Active class will be the selected tab -->
+    <%= link_to "Chefs", chefs_path %>
+  </li>
+</ul>
+
+
 <div class = "row">
  <div class = "col-md-4 col-md-offset-4 center">
    <%= will_paginate %>
