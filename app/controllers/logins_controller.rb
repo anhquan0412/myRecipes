@@ -10,6 +10,8 @@ class LoginsController < ApplicationController
   def create
     chef = Chef.find_by(email: params[:email]) #no instance variable
     if chef && chef.authenticate(params[:password])# if this chef exists in our database, and the passwords match
+    
+      #save chef_id in cookie HERE
       session[:chef_id] = chef.id #take the chef.id and store it in our browser session COOKIE
       flash[:success] = "You are logged in"
       redirect_to recipes_path
