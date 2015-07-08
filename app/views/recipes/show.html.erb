@@ -21,10 +21,18 @@
     </div>
     
     <div class = "well">
+      
+      <!-- this will go to partial _style.html.erb and _ingredient.html.erb. This work for
+      1-to-many or many-to-many associations-->
+      <!-- this will loop all the styles with iteration 'style'/ ingredients with iteration 'ingredient' 
+      of a recipe -->
+      <p>Style: <%= render @recipe.styles %></p>
+      <p>Ingredient: <%= render @recipe.ingredients %></p>
+      
       <strong>Step: </strong>
       <p> 
       <%=simple_format(@recipe.description) %>
-      </p> <!-- the simple_formal identifies and show string in new line (when you hit enter) -->
+      </p> <!-- the simple_format identifies and show string in new line (when you hit enter) -->
       
       <!-- LIKE BUTTON -->
       <div class="pull-right">

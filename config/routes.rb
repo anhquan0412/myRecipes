@@ -26,7 +26,6 @@ Rails.application.routes.draw do
   end
   
   resources :chefs, except: [:new] #we want the URL to be  .../register, not .../new for new_chef
-  
   get '/register', to: 'chefs#new'
   
   #login -> new session
@@ -37,4 +36,6 @@ Rails.application.routes.draw do
   get '/logout', to: "logins#destroy"
   
   
+  resources :styles, only: [:new,:create, :show]
+  resources :ingredients, only: [:new,:create, :show]
 end

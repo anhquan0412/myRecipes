@@ -1,6 +1,5 @@
-<%= render 'shared/page_title', title: "All Recipes" %> <!-- remember to use double quote here for string? -->
-
 <!-- doing tab. Look at index page in recipe -->
+<!-- 
 <ul class = "nav nav-tabs">
   <li class='active'>
     <%= link_to "Recipes",recipes_path %>
@@ -9,14 +8,16 @@
     <%= link_to "Chefs", chefs_path %>
     
   </li>
-</ul>
+</ul> 
+
+-->
 
 
-<!-- doing paginate, NEED AN INSTANT VARIABLE TO DO PAGINATE, in this case we have @recipes -->
-<!-- don't have to pass instant variable into will_paginate because there is only 1 instant variable @recipes -->
-<%= will_paginate @recipes%>
 
-<% @recipes.each do |recipe| %>
+
+<%= will_paginate paginate_param %>
+
+<% objects.each do |recipe| %>
   <div class='row'>
     
     <!-- gravatar stuff below -->
@@ -33,8 +34,6 @@
       
       <!-- this will go to partial _style.html.erb and _ingredient.html.erb. This work for
       1-to-many or many-to-many associations-->
-      <!-- this will loop all the styles with iteration 'style'/ ingredients with iteration 'ingredient' 
-      of a recipe -->
       <p>Style: <%= render recipe.styles %></p>
       <p>Ingredient: <%= render recipe.ingredients %></p>
       
@@ -73,7 +72,7 @@
 
 <% end %>
 
+<h5><%= link_to "Return to recipe list", recipes_path, class: "btn btn-warning btn-small" %> </h5>
 
-
-<%= will_paginate %>
+<%= will_paginate paginate_param %>
 <!-- page index at bottom of page ->

@@ -1,0 +1,3 @@
+<%= render 'shared/page_title', title: "Recipes for: " + @style.name + " food" %> <!-- remember to use double quote here for string? -->
+
+<%= render 'shared/show', paginate_param: @recipes, objects: @style.recipes %>
