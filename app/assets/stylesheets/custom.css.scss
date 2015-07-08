@@ -58,6 +58,12 @@ body
   
 }
 
+
+.input_checkbox input { //name of checkbox for styles and ingredients in _form.html.erb
+// only edit the INPUT
+  width: auto !important;
+}
+
 .center
 {
   text-align:center;

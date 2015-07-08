@@ -26,8 +26,13 @@
       1-to-many or many-to-many associations-->
       <!-- this will loop all the styles with iteration 'style'/ ingredients with iteration 'ingredient' 
       of a recipe -->
-      <p>Style: <%= render @recipe.styles %></p>
-      <p>Ingredient: <%= render @recipe.ingredients %></p>
+      <% if @recipe.styles.any? %>
+        <p>Style: <%= render @recipe.styles %></p>
+      <% end %>
+      
+      <% if @recipe.ingredients.any? %>
+        <p>Ingredient: <%= render @recipe.ingredients %></p>
+      <% end %>
       
       <strong>Step: </strong>
       <p> 
