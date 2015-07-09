@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
   
   def logged_in? # check if the user is logged in or not
-    !!current_user # using current_user function; return true if @current_user which is returned from func current_user is not null
+    !!current_user # using current_user function; return true if @current_user, which is returned from func current_user, is not null
   end
   
   def require_user

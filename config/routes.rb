@@ -25,8 +25,10 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :chefs, except: [:new] #we want the URL to be  .../register, not .../new for new_chef
+  resources :chefs, except: [:new,:destroy] 
+  #we want the URL to be  .../register, not .../new for new_chef
   get '/register', to: 'chefs#new'
+  
   
   #login -> new session
   get '/login', to: "logins#new"

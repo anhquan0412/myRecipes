@@ -10,10 +10,18 @@
   </div>
     
   <div class = "col-md-8">
-    <% if logged_in? && @recipe.chef == current_user %> <!-- if user is logged in and 
+    <% if logged_in? && (@recipe.chef == current_user || current_user.admin?) %> <!-- if user is logged in and 
     the chef we want to edit is the chef in our cookie -->
       <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-success pull-right" %> 
     <% end %>
+    
+    
+    
+    <!-- delete recipe -->
+    <% if logged_in? && current_user.admin? %>
+      <%= link_to "Delete Recipe", recipe_path(@recipe), method: :delete, data: {confirm: "Are you sure? Cannot be undone!" } %>
+    <% end %>
+    
     <h3> <%= @recipe.summary %></h3>
     
     <div class="show_recipe">
