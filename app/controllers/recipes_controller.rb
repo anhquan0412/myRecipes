@@ -80,7 +80,7 @@ class RecipesController < ApplicationController
     #do set_recipe
     like = Like.create(like: params[:like], chef: current_user, recipe: @recipe)
     
-    if like.valid?
+    if like.valid? #check validation
     
     #params[:like] would return true if thumb-up, false if thumb-down, this is passed here from show.html.erb
       if temp == 'true'

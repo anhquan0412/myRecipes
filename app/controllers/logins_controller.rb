@@ -25,7 +25,5 @@ class LoginsController < ApplicationController
     session[:chef_id] = nil
     flash[:success] = "You have logged out" #use flash if you redirect_to some path
     redirect_to root_path
-    
-    
   end
 end
