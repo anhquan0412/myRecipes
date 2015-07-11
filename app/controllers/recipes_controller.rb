@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:edit, :update, :show, :like]
+  before_action :set_recipe, only: [:edit, :update, :show, :like, :destroy]
   #the set_recipe action has to be placed before require_same_user, 
   #so require_same_user can have the instant variable it needs.
   
