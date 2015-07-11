@@ -103,8 +103,9 @@ class RecipesController < ApplicationController
   end
   
   def destroy
-    Recipe.find(params[:id]).destroy
     flash[:success] = " \"#{@recipe.name}\" is deleted successfully"
+    Recipe.find(params[:id]).destroy
+    
     redirect_to recipes_path
   end
   
