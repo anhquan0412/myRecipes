@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   resources :recipes do
     # create a like path for a recipe
     member do
-      post 'like'  
+      post 'like'
+      
+      post 'comment',to: 'comments#create'
     end
   end
   
@@ -38,7 +40,8 @@ Rails.application.routes.draw do
   get '/logout', to: "logins#destroy"
   
   
-  resources :styles, only: [:new,:create, :show]
-  resources :ingredients, only: [:new,:create, :show]
+  
+  resources :styles, only: [:new,:create,:show,:destroy]
+  resources :ingredients, only: [:new,:create, :show,:destroy]
   
 end
