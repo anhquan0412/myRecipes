@@ -18,12 +18,19 @@ Rails.application.routes.draw do
   
   
   #another way to get all the above standard routes
+  
+  #resources :comments, only: [:create, :edit, :destroy]
+  
+  
   resources :recipes do
     # create a like path for a recipe
     member do
       post 'like'
       
-      post 'comment',to: 'comments#create'
+      post 'comment' #create comment
+      
+      post 'deletecomment'
+      
     end
   end
   

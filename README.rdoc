@@ -22,3 +22,5 @@ description: text
 Build a review system
 check uniqueness for ingredient and style
 destroy ingredient and style (admin)
+delete comment controller
+Uppercase every name

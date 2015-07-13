@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:edit, :update, :show, :like, :destroy]
+  before_action :set_recipe, only: [:edit, :update, :show, :like, :comment, :destroy, :deletecomment]
   #the set_recipe action has to be placed before require_same_user, 
   #so require_same_user can have the instant variable it needs.
   
@@ -57,7 +57,41 @@ class RecipesController < ApplicationController
     #binding.pry #to hold the server (when the user click on the link to show recipe, server is put on hold)
     
     #do set_recipe
+    
+    
+    # this is like new function in comments controller
+    @comment = Comment.new
+    
+    #index
+    @comments = Comment.paginate(page: params[:page], per_page: 10) 
+    
   end
+  
+  #### COMMENT METHOD ####
+  def comment # create comment
+    
+    @comment = Comment.new(comment_params)
+    @comment.chef = current_user
+    @comment.recipe = @recipe
+    
+    if @comment.save
+      flash[:success] = "Comment Successfully!"
+    else
+      flash[:danger] = "Invalid comment length!"
+      
+    end
+    redirect_to recipe_path(@recipe)
+  end
+  
+  def deletecomment
+    
+    flash[:success] = " Your comment is deleted successfully"
+    Comment.find(params[:comment_id]).destroy
+    
+    redirect_to recipe_path(@recipe)
+  end
+  
+  
   
   def edit
     #do set_recipe
@@ -115,6 +149,12 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(:name, :summary, :description, :picture, style_ids: [], ingredient_ids: []) 
       #add " array: [] " to whitelist for array in checkbox 
+    end
+    
+    
+    def comment_params
+      params.require(:comment).permit(:comment)
+      
     end
     
     def set_recipe

@@ -1,6 +1,8 @@
 <%= render 'shared/page_title', title: @recipe.name %>
 
 
+
+
 <div class ="row">
   <div class ="col-md-4 pull-right center">
     <%= link_to gravatar_for(@recipe.chef, size: 200), chef_path(@recipe.chef) %>
@@ -68,4 +70,83 @@
   </div>
 </div>
 
-<h5><%= link_to "Return to recipe list", recipes_path, class: "btn btn-warning btn-small" %> </h5>
+
+<!-- comment -->
+
+&nbsp
+  <h3>Comments</h3>
+
+<div class='row'> 
+  <div class = 'well col-lg-7 col-md-offset-1 '>
+    <% if @recipe.comments.any? %>
+      <%= will_paginate @comments %>
+      
+      
+      
+      <% @recipe.comments.each do |comment| %>
+        <h5>
+          <%= link_to gravatar_for(Chef.find(comment.chef_id), size: 50), chef_path(Chef.find(comment.chef_id)) %> &nbsp
+          <b>
+            <%=link_to Chef.find(comment.chef_id).chefname, chef_path(Chef.find(comment.chef_id)) %>
+          </b> : <%= comment.comment %>
+         
+        </h5>
+      
+        <!-- delete comment -->
+        <div class="pull-right">
+          <%= link_to deletecomment_recipe_path(@recipe,comment_id: comment.id), method: :post do %> 
+            <i class="glyphicon glyphicon-remove-circle">Delete</i> 
+          <% end %> 
+        </div>
+      
+      
+        <p>
+          <span class='quiet'>
+            <small><%= time_ago_in_words(comment.updated_at) %> ago</small>  
+          </span>
+        </p>
+        <hr class = "comment_divider"/>
+      
+      
+      <% end %>
+    
+    
+    <% else %>
+      <h4>Be the first to comment!</h4>
+    <% end %>
+    
+    
+    
+    <!-- comment form_for -->
+    <% if logged_in? %>
+      <div class = "row">
+        <div class = "col-md-4">
+          <%= link_to gravatar_for(current_user, size: 50), chef_path(current_user) %> &nbsp
+          <b><%= link_to current_user.chefname, current_user %></b> :
+        </div>
+        <div class = "col-lg-8 comment pull-right">
+          <%= form_for(@comment, url: comment_recipe_path) do |f|%>
+            <%= f.text_field :comment %>
+      
+            <%= f.submit('Comment!', class: "btn btn-success")%>
+        
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <b>Please log in to comment: </b> &nbsp &nbsp 
+      <%= link_to "Log in", login_path, class: "btn btn-warning btn-small" %>
+    <% end %>
+      
+    
+    
+  </div>
+  
+</div>
+
+
+<div class= "row">
+  <div class = "col-lg-5 col-lg-offset-3 center">
+    <h5><%= link_to "Return to recipe list", recipes_path, class: "btn btn-warning btn-small" %> </h5>
+  </div>
+</div>
