@@ -93,12 +93,14 @@
         </h5>
       
         <!-- delete comment -->
-        <div class="pull-right">
-          <%= link_to deletecomment_recipe_path(@recipe,comment_id: comment.id), method: :post do %> 
-            <i class="glyphicon glyphicon-remove-circle">Delete</i> 
-          <% end %> 
-        </div>
-      
+        <% if (logged_in? && (current_user.admin? || current_user == comment.chef)) %>
+          <div class="pull-right">
+            <%= link_to deletecomment_recipe_path(@recipe,comment_id: comment.id), method: :post, data: {confirm: "Do you want to delete your comment?" } do %> 
+              <i class="glyphicon glyphicon-remove-circle">Delete</i> 
+            <% end %> 
+          </div>
+        
+        <% end %>
       
         <p>
           <span class='quiet'>

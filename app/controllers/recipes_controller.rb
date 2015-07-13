@@ -84,9 +84,15 @@ class RecipesController < ApplicationController
   end
   
   def deletecomment
+    comment = Comment.find(params[:comment_id])
+    if(current_user.admin? or comment.chef == current_user)
     
-    flash[:success] = " Your comment is deleted successfully"
-    Comment.find(params[:comment_id]).destroy
+      flash[:success] = " Your comment is deleted successfully"
+      comment.destroy
+    
+    else
+      flash[:danger] = "You cannot delete other user's comment!"
+    end
     
     redirect_to recipe_path(@recipe)
   end
