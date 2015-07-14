@@ -1,0 +1,21 @@
+<%= render 'shared/page_title', title: "Edit style" %>
+
+<%= render 'shared/error', obj: @style %> <!-- passing @recipe object in to 'obj' object in _error.html.erb -->
+
+<div class = "row">
+  <div class="well col-md-8 col-md-offset-2">
+    
+    <% if (current_user.admin?) %>
+      <%= link_to "[delete]", style_path(@style), method: :delete, data: {confirm: "Are you sure?"}  %>
+    <% end %>
+    
+    <%= form_for(@style) do |f|%>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    
+      <%= f.submit('Edit style', class: "btn btn-success")%>
+      
+    <% end %>
+      
+  </div>
+</div>

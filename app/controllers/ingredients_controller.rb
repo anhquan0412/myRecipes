@@ -41,7 +41,7 @@ class IngredientsController < ApplicationController
       redirect_to recipes_path
       
     else
-      render :new
+      render :edit
     end
     
     

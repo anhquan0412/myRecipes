@@ -9,7 +9,14 @@
             <% end %>
             <ul class="dropdown-menu">
               <% Style.all.each do |style| %>
-                <li><%= link_to style.name, style_path(style) %></li>
+                <li>
+                  <%= link_to style.name, style_path(style) %>
+                  
+                  <% if (logged_in? && current_user.admin?) %>
+                    <%= link_to "[edit/delete]", edit_style_path(style) %>
+                  <% end %>
+                  
+                </li>
               <% end %>
               
               <% if logged_in? %>
