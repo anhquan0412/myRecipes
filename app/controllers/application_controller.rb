@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   #these functions below are available to the controller but not for the view folder
-  #to make them available for view
+  #to make them available for VIEW
   helper_method :current_user, :logged_in? 
   
   def current_user # check if the user can do authorized thing 
@@ -27,6 +27,14 @@ class ApplicationController < ActionController::Base
     rescue ActionController::RedirectBackError
     redirect_to root_path
     
+  end
+  
+  def admin_user
+    if !current_user.admin?
+      flash[:danger]= "You are not authorized to do this"
+      redirect_to recipes_path
+    end
+      
   end
   
   

@@ -29,7 +29,16 @@
             <% end %>
             <ul class="dropdown-menu">
               <% Ingredient.all.each do |ing| %>
-                <li><%= link_to ing.name, ingredient_path(ing) %></li>
+                <li>
+                  <%= link_to ing.name, ingredient_path(ing) %>
+                  
+                  <% if (logged_in? && current_user.admin?) %>
+                    <%= link_to "[edit/delete]", edit_ingredient_path(ing) %>
+                  <% end %>
+                  
+                </li>
+                
+                
               <% end %>
               
               <% if logged_in? %>

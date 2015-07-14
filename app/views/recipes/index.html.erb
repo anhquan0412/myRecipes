@@ -44,6 +44,16 @@
         <p>Ingredient: <%= render recipe.ingredients %></p>
       <% end %>
       
+      
+      <p>
+        <span class='quiet'>
+          <small>Created at: <%= time_ago_in_words(recipe.created_at) %> ago. </small>
+          <small>Updated at: <%= time_ago_in_words(recipe.updated_at) %> ago</small>  
+          
+        </span>
+      </p>
+      
+      
        <!-- LIKE BUTTON -->
       <div class="pull-right">
         <%= link_to like_recipe_path(recipe,like: true), method: :post do %> <!-- without the method: :post, it will go the GET (home action) path. 
@@ -58,14 +68,25 @@
         
       </div>
       
-      
+      <!-- show comments -->
       <p>
-        <span class='quiet'>
-          <small>Created at: <%= time_ago_in_words(recipe.created_at) %> ago. </small>
-          <small>Updated at: <%= time_ago_in_words(recipe.updated_at) %> ago</small>  
-          
-        </span>
+        <%= link_to recipe_path(recipe) do %>
+          <% if (recipe.commentcount == 0) %>
+            No comment.
+          <% else %>
+            <% if (recipe.commentcount == 1) %>
+              <%= recipe.commentcount %> comment. 
+            <% else %>
+              <%= recipe.commentcount %> comments. 
+            <% end %>
+            
+            
+          <% end %>
+        
+        
+        <% end %>
       </p>
+      
     </div>
     
     <!-- for the recipe's picture, we use the gravatar class again since we want the pic to be curvy, like chef's pic -->

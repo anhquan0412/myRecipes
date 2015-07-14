@@ -24,7 +24,7 @@ Build a review system
 destroy ingredient and style (admin)
 
 Uppercase every name
-Show number of comments for each recipe at index page
+//Show number of comments for each recipe at index page
 Sort by name/like/update time
 Upload picture for chef
 like/dislike feature

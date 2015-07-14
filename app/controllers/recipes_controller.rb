@@ -9,6 +9,7 @@ class RecipesController < ApplicationController
   before_action :require_same_user, only: [:edit, :update]
   
   before_action :admin_user, only: [:destroy]
+  #defined in application_controller
   
   
   
@@ -36,6 +37,7 @@ class RecipesController < ApplicationController
     
     #initialize likecount
     @recipe.likecount = 0
+    @recipe.commentcount = 0
     
     
     #need a chef here, otherwise it will violate database integrity (chef_id must be present)
@@ -76,6 +78,8 @@ class RecipesController < ApplicationController
     
     if @comment.save
       flash[:success] = "Comment Successfully!"
+      @recipe.commentcount = @recipe.commentcount + 1
+      @recipe.save
     else
       flash[:danger] = "Invalid comment length!"
       
@@ -89,6 +93,8 @@ class RecipesController < ApplicationController
     
       flash[:success] = " Your comment is deleted successfully"
       comment.destroy
+      @recipe.commentcount = @recipe.commentcount - 1
+      @recipe.save
     
     else
       flash[:danger] = "You cannot delete other user's comment!"
@@ -177,11 +183,6 @@ class RecipesController < ApplicationController
       redirect_to root_path
     end
     
-    def admin_user
-      if !current_user.admin?
-        redirect_to recipes_path
-      end
-      
-    end
+    
     
 end

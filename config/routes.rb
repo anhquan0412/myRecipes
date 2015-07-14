@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   
   
   
-  resources :styles, only: [:new,:create,:show,:destroy]
-  resources :ingredients, only: [:new,:create, :show,:destroy]
+  resources :styles
+  resources :ingredients
   
 end
