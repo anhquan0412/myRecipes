@@ -18,13 +18,14 @@ description: text
 
 
 -DONE: in show.html.erb of chef, if a chef does not have any recipes, print "You have no recipe yet" (chef.recipes.any?)
--TODO: Check uniqueness for style and ingredient, delete CHef
-Build a review system
+-TODO: 
 
-destroy ingredient and style (admin)
+Check uniqueness for style and ingredient, delete CHef
+//Build a review system
 
-Uppercase every name
+//destroy ingredient and style (admin)
+
+
 //Show number of comments for each recipe at index page
 Sort by name/like/update time
 Upload picture for chef
-like/dislike feature
