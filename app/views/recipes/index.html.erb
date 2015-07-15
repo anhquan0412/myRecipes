@@ -15,23 +15,26 @@
 
 <!-- sorting -->
 
-<ul class="nav_ul_item pull-right">
-  <div class="dropdown">
-      <%= link_to '#', class: "btn btn-default dropdown-toggle", "data-toggle" => "dropdown" do %>
-        Sort by: <b class="caret"></b>
-      <% end %>
-      
-      <ul class="dropdown-menu">
-        <li><%= link_to "Most Recent", recipes_path(order: 1) %></li>
-      
-        <li><%= link_to "Most Likes", recipes_path(order: 2) %></li>
-       
-        <li><%= link_to "Most Comments", recipes_path(order: 3) %></li>
-      </ul>
-      
-  </div>
-</ul>
+  <ul class="nav_ul_item pull-right">
+    <div class="dropdown">
+        <%= link_to '#', class: "btn btn-default dropdown-toggle", "data-toggle" => "dropdown" do %>
+          Sort by: <b class="caret"></b>
+        <% end %>
+        
+        <ul class="dropdown-menu">
+          <li><%= link_to "Most Recent", recipes_path(order: 1) %></li>
+        
+          <li><%= link_to "Most Likes", recipes_path(order: 2) %></li>
+         
+          <li><%= link_to "Most Comments", recipes_path(order: 3) %></li>
+        </ul>
+        
+    </div>
+  </ul>
+
+
 &nbsp
+<hr/>
 
 
 

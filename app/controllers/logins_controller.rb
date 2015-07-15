@@ -16,8 +16,8 @@ class LoginsController < ApplicationController
       flash[:success] = "You are logged in"
       redirect_to recipes_path
     else
-      flash.now[:danger] = "Your email or password does not match" #using flash.now if you will render something later
-      render :new
+      flash[:danger] = "Your email or password does not match" #using flash.now if you will render something later
+      render 'new'
     end
   end
   

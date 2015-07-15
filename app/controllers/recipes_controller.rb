@@ -88,7 +88,7 @@ class RecipesController < ApplicationController
     @comment = Comment.new
     
     #index
-    @comments = @recipe.comments.paginate(page: params[:page], per_page: 10) 
+    @comments = @recipe.comments.paginate(page: params[:page], per_page: 5) 
     
   end
   

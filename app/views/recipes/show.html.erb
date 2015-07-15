@@ -90,19 +90,24 @@
 <% if logged_in? && current_user.admin? %>
   <%= link_to "Delete Recipe", recipe_path(@recipe), method: :delete, data: {confirm: "Are you sure? Cannot be undone!" } %>
  <% end %>
+ 
+ 
+ 
 <!-- comment -->
-
 
 <h3 class = "center">Comments</h3>
 
+
+<%= will_paginate @comments %>
+
 <div class='row'> 
   <div class = 'well col-lg-8 col-sm-offset-1 '>
-    <% if @recipe.comments.any? %>
-      <%= will_paginate @comments %>
+    <% if @comments.any? %>
       
       
       
-      <% @recipe.comments.each do |comment| %>
+      
+      <% @comments.each do |comment| %>
         <h5>
           <%= link_to gravatar_for(Chef.find(comment.chef_id), size: 50), chef_path(Chef.find(comment.chef_id)) %> &nbsp
           <b>
@@ -141,11 +146,11 @@
     <!-- comment form_for -->
     <% if logged_in? %>
       <div class = "row">
-        <div class = "col-md-2">
+        <div class = "col-md-4">
           <%= link_to gravatar_for(current_user, size: 50), chef_path(current_user) %> &nbsp
           <b><%= link_to current_user.chefname, current_user %></b> :
         </div>
-        <div class = "col-lg-10 comment">
+        <div class = "col-lg-8 comment">
           <%= form_for(@comment, url: comment_recipe_path) do |f|%>
             <%= f.text_field :comment %>
       
