@@ -6,13 +6,13 @@
     
     
     <%= form_for(@chef, html: { multipart: true}) do |f|%>
-      <%= f.label :chefname %>
+      <%= f.label :Name %>
       <%= f.text_field :chefname %>
       
-      <%= f.label :email %>
+      <%= f.label :Email %>
       <%= f.text_field :email %>
       
-      <%= f.label :password %>
+      <%= f.label :Password %>
       <%= f.password_field :password %> <!-- password_field: show the letter with dot -->
       
       

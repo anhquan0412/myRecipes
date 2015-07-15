@@ -27,11 +27,11 @@ class RecipesController < ApplicationController
         #flash[:success]="most recent"
       else
         if(temp == '2') #sort by likes
-          sql = "SELECT recipes.* FROM recipes   ORDER BY likecount DESC, recipes.updated_at DESC"
+          sql = "SELECT recipes.* FROM recipes   ORDER BY likecount DESC, recipes.created_at DESC"
           @recipes = Recipe.paginate_by_sql(sql,page: params[:page], per_page: 5)
           #flash[:success]="most likes"
         else #sort by comments
-          sql = "SELECT recipes.* FROM recipes   ORDER BY commentcount DESC, recipes.updated_at DESC"
+          sql = "SELECT recipes.* FROM recipes   ORDER BY commentcount DESC, recipes.created_at DESC"
           @recipes = Recipe.paginate_by_sql(sql,page: params[:page], per_page: 5)
           #flash[:success]="most comments"
         end  
@@ -88,7 +88,7 @@ class RecipesController < ApplicationController
     @comment = Comment.new
     
     #index
-    @comments = Comment.paginate(page: params[:page], per_page: 10) 
+    @comments = @recipe.comments.paginate(page: params[:page], per_page: 10) 
     
   end
   

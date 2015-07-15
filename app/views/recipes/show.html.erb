@@ -1,17 +1,17 @@
 <%= render 'shared/page_title', title: @recipe.name %>
-
+<h5><%= link_to "Return to recipe list", recipes_path, class: "btn btn-warning btn-small" %> </h5>
 
 
 
 <div class ="row">
-  <div class ="col-md-4 pull-right center">
+  <div class ="col-sm-4 pull-right center">
     <%= link_to gravatar_for(@recipe.chef, size: 200), chef_path(@recipe.chef) %>
     <p>
       <h5>Brought to you by <%= @recipe.chef.chefname %></h5>
     </p>
   </div>
     
-  <div class = "col-md-8">
+  <div class = "col-lg-8">
     <% if logged_in? && (@recipe.chef == current_user || current_user.admin?) %> <!-- if user is logged in and 
     the chef we want to edit is the chef in our cookie -->
       <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-success pull-right" %> 
@@ -19,35 +19,47 @@
     
     
     
-    <!-- delete recipe -->
-    <% if logged_in? && current_user.admin? %>
-      <%= link_to "Delete Recipe", recipe_path(@recipe), method: :delete, data: {confirm: "Are you sure? Cannot be undone!" } %>
-    <% end %>
     
-    <h3> <%= @recipe.summary %></h3>
     
-    <div class="show_recipe">
-      <%= image_tag(@recipe.picture.url, class: "gravatar") if @recipe.picture? %>
-    </div>
+    <h3>Summary: <%= @recipe.summary %></h3>
+    
+    
     
     <div class = "well">
-      
-      <!-- this will go to partial _style.html.erb and _ingredient.html.erb. This work for
-      1-to-many or many-to-many associations-->
-      <!-- this will loop all the styles with iteration 'style'/ ingredients with iteration 'ingredient' 
-      of a recipe -->
-      <% if @recipe.styles.any? %>
-        <p>Style: <%= render @recipe.styles %></p>
-      <% end %>
-      
-      <% if @recipe.ingredients.any? %>
-        <p>Ingredient: <%= render @recipe.ingredients %></p>
-      <% end %>
-      
-      <strong>Step: </strong>
-      <p> 
-      <%=simple_format(@recipe.description) %>
-      </p> <!-- the simple_format identifies and show string in new line (when you hit enter) -->
+      <div class = "row">
+        
+        <div class = "col-lg-6">
+          <!-- this will go to partial _style.html.erb and _ingredient.html.erb. This work for
+          1-to-many or many-to-many associations-->
+          <!-- this will loop all the styles with iteration 'style'/ ingredients with iteration 'ingredient' 
+          of a recipe -->
+          <% if @recipe.styles.any? %>
+            <p>Style: <%= render @recipe.styles %></p>
+          <% else %>
+            <p>Style: n/a</p>
+          <% end %>
+        
+          <% if @recipe.ingredients.any? %>
+            <p>Ingredient: <%= render @recipe.ingredients %></p>
+          <% else %>
+            <p>Ingredient: n/a</p>
+          <% end %>
+          
+          <strong>Step: </strong>
+          <p> 
+          <%=simple_format(@recipe.description) %>
+          </p> <!-- the simple_format identifies and show string in new line (when you hit enter) -->
+        
+        
+        </div>
+        
+        
+        <div class="col-lg-4 show_recipe">
+          <%= image_tag(@recipe.picture.url, size: "330x240", class: "gravatar") if @recipe.picture? %>
+        </div>
+        
+        
+      </div> 
       
       <!-- LIKE BUTTON -->
       <div class="pull-right">
@@ -71,13 +83,17 @@
 </div>
 
 
+<!-- delete recipe -->
+<% if logged_in? && current_user.admin? %>
+  <%= link_to "Delete Recipe", recipe_path(@recipe), method: :delete, data: {confirm: "Are you sure? Cannot be undone!" } %>
+ <% end %>
 <!-- comment -->
 
-&nbsp
-<h3>Comments</h3>
+
+<h3 class = "center">Comments</h3>
 
 <div class='row'> 
-  <div class = 'well col-lg-7 col-md-offset-1 '>
+  <div class = 'well col-lg-8 col-sm-offset-1 '>
     <% if @recipe.comments.any? %>
       <%= will_paginate @comments %>
       
@@ -122,11 +138,11 @@
     <!-- comment form_for -->
     <% if logged_in? %>
       <div class = "row">
-        <div class = "col-md-4">
+        <div class = "col-md-2">
           <%= link_to gravatar_for(current_user, size: 50), chef_path(current_user) %> &nbsp
           <b><%= link_to current_user.chefname, current_user %></b> :
         </div>
-        <div class = "col-lg-8 comment pull-right">
+        <div class = "col-lg-10 comment">
           <%= form_for(@comment, url: comment_recipe_path) do |f|%>
             <%= f.text_field :comment %>
       
@@ -147,8 +163,3 @@
 </div>
 
 
-<div class= "row">
-  <div class = "col-lg-5 col-lg-offset-3 center">
-    <h5><%= link_to "Return to recipe list", recipes_path, class: "btn btn-warning btn-small" %> </h5>
-  </div>
-</div>

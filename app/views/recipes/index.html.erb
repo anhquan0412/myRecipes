@@ -24,13 +24,9 @@
       <ul class="dropdown-menu">
         <li><%= link_to "Most Recent", recipes_path(order: 1) %></li>
       
-      
-      
-         <li><%= link_to "Most Likes", recipes_path(order: 2) %></li>
-     
-      
+        <li><%= link_to "Most Likes", recipes_path(order: 2) %></li>
        
-         <li><%= link_to "Most Comments", recipes_path(order: 3) %></li>
+        <li><%= link_to "Most Comments", recipes_path(order: 3) %></li>
       </ul>
       
   </div>
@@ -56,8 +52,8 @@
     </div>
     
     <div class="col-lg-6 well">
-      <h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
-      <p><%= recipe.summary %></p>
+      <h4 class="recipe_name"><%= link_to recipe.name, recipe_path(recipe) %></h4>
+      <p><b> Summary:</b> <%= recipe.summary %> </p>
       
       <!-- this will go to partial _style.html.erb and _ingredient.html.erb. This work for
       1-to-many or many-to-many associations-->
@@ -66,17 +62,20 @@
       
       <% if recipe.styles.any? %>
         <p>Style: <%= render recipe.styles %></p>
+      <% else %>
+        <p>Style: n/a</p>
       <% end %>
       
       <% if recipe.ingredients.any? %>
         <p>Ingredient: <%= render recipe.ingredients %></p>
+      <% else %>
+        <p>Ingredient: n/a</p>
       <% end %>
       
       
       <p>
         <span class='quiet'>
-          <small>Created at: <%= time_ago_in_words(recipe.created_at) %> ago. </small>
-          <small>Updated at: <%= time_ago_in_words(recipe.updated_at) %> ago</small>  
+          <small>Posted <%= time_ago_in_words(recipe.created_at) %> ago. </small>
           
         </span>
       </p>
@@ -119,7 +118,7 @@
     
     <!-- for the recipe's picture, we use the gravatar class again since we want the pic to be curvy, like chef's pic -->
     <div class="col-md-4">
-      <%= image_tag(recipe.picture.url, size: "280x200", class: "gravatar") if recipe.picture? %> <!-- we can put the if part at the end, weird -->
+      <%= image_tag(recipe.picture.url, size: "300x230", class: "gravatar") if recipe.picture? %> <!-- we can put the if part at the end, weird -->
     </div>
     
   </div>
