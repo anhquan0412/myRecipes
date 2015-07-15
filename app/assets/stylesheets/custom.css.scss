@@ -89,11 +89,11 @@ body
   
 }
 
-.comment_divider
+.thick_divider
 {
   display: block; height: 1px;
-    border: 0; border-top: 1px solid #ccc;
-    margin: 1em 0; padding: 0; 
+  border: 0; border-top: 1px solid #ccc;
+  margin: 1em 0; padding: 0; 
 }
 
 .input_checkbox input { //name of checkbox for styles and ingredients in _form.html.erb
@@ -176,5 +176,6 @@ span.picture { //to edit the part of 'choose file to upload' in _form
 
 
 .show_recipe { //to edit recipe's pictures on show.html.erb
-  margin: 10px 10px 10px 10px;
+  margin: 10px 10px;
+  
 }

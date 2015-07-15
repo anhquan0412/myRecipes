@@ -4,14 +4,14 @@
 
 
 <div class ="row">
-  <div class ="col-sm-4 pull-right center">
-    <%= link_to gravatar_for(@recipe.chef, size: 200), chef_path(@recipe.chef) %>
+  <div class ="col-md-3 pull-right center">
+    <%= link_to gravatar_for(@recipe.chef, size: 190), chef_path(@recipe.chef) %>
     <p>
       <h5>Brought to you by <%= @recipe.chef.chefname %></h5>
     </p>
   </div>
     
-  <div class = "col-lg-8">
+  <div class = "col-lg-9">
     <% if logged_in? && (@recipe.chef == current_user || current_user.admin?) %> <!-- if user is logged in and 
     the chef we want to edit is the chef in our cookie -->
       <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-success pull-right" %> 
@@ -27,6 +27,11 @@
     
     <div class = "well">
       <div class = "row">
+        
+        <div class="col-md-5 show_recipe pull-right">
+          <%= image_tag(@recipe.picture.url, size: "320x240", class: "gravatar") if @recipe.picture? %>
+        </div>
+        
         
         <div class = "col-lg-6">
           <!-- this will go to partial _style.html.erb and _ingredient.html.erb. This work for
@@ -54,9 +59,7 @@
         </div>
         
         
-        <div class="col-lg-4 show_recipe">
-          <%= image_tag(@recipe.picture.url, size: "330x240", class: "gravatar") if @recipe.picture? %>
-        </div>
+        
         
         
       </div> 
@@ -123,7 +126,7 @@
             <small><%= time_ago_in_words(comment.updated_at) %> ago</small>  
           </span>
         </p>
-        <hr class = "comment_divider"/>
+        <hr class = "thick_divider"/>
       
       
       <% end %>

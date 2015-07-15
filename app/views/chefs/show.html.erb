@@ -25,16 +25,48 @@
 
 
 
-<% @recipes.each do |recipe| %> <!-- normally we will do @chef.recipes.each 
-but we have an instant variable @recipes which is defined in show method of chef_controller -->
-  <div class = "row">
-    <div class="col-lg-6 well col-lg-offset-2">
-      <h4><%= link_to recipe.name, recipe_path(recipe) %></h4>
-      <p><%= recipe.summary %></p>
+<% @recipes.each do |recipe| %>
+  <div class='row'>
+    
+    <!-- gravatar stuff below -->
+    <div class = "col-md-2"> <!-- preserve 2 columns for image-->
+     
+    </div>
+    
+    <div class="col-lg-6 well">
+      <h4 class="recipe_name"><%= link_to recipe.name, recipe_path(recipe) %></h4>
+      <p><b> Summary:</b> <%= recipe.summary %> </p>
+      
+      <!-- this will go to partial _style.html.erb and _ingredient.html.erb. This work for
+      1-to-many or many-to-many associations-->
+      <!-- this will loop all the styles with iteration 'style'/ ingredients with iteration 'ingredient' 
+      of a recipe -->
+      
+      <% if recipe.styles.any? %>
+        <p>Style: <%= render recipe.styles %></p>
+      <% else %>
+        <p>Style: n/a</p>
+      <% end %>
+      
+      <% if recipe.ingredients.any? %>
+        <p>Ingredient: <%= render recipe.ingredients %></p>
+      <% else %>
+        <p>Ingredient: n/a</p>
+      <% end %>
+      
+      
+      <p>
+        <span class='quiet'>
+          <small>Posted <%= time_ago_in_words(recipe.created_at) %> ago. </small>
+          
+        </span>
+      </p>
+      
       
        <!-- LIKE BUTTON -->
       <div class="pull-right">
-        <%= link_to like_recipe_path(recipe,like: true), method: :post do %> 
+        <%= link_to like_recipe_path(recipe,like: true), method: :post do %> <!-- without the method: :post, it will go the GET (home action) path. 
+        We want to CREATE a like, which is a POST action -->
           <!-- create thumb up thumb down using twitter bootstrap from getbootstrap.com-->
           <i class="glyphicon glyphicon-thumbs-up"></i> &nbsp <%= recipe.thumbs_up_total %>
         <% end %> &nbsp&nbsp&nbsp&nbsp <!-- create 4 spaces -->
@@ -45,19 +77,34 @@ but we have an instant variable @recipes which is defined in show method of chef
         
       </div>
       
-      
+      <!-- show comments -->
       <p>
-        <span class='quiet'>
-          <small>Created at: <%= time_ago_in_words(recipe.created_at) %> ago. </small>
-          <small>Updated at: <%= time_ago_in_words(recipe.updated_at) %> ago</small>  
-          
-        </span>
+        <%= link_to recipe_path(recipe) do %>
+          <% if (recipe.commentcount == 0) %>
+            No comment.
+          <% else %>
+            <% if (recipe.commentcount == 1) %>
+              <%= recipe.commentcount %> comment. 
+            <% else %>
+              <%= recipe.commentcount %> comments. 
+            <% end %>
+            
+            
+          <% end %>
+        
+        
+        <% end %>
       </p>
+      
     </div>
     
-    <!-- picture -->
+    <!-- for the recipe's picture, we use the gravatar class again since we want the pic to be curvy, like chef's pic -->
     <div class="col-md-4">
-      <%= image_tag(recipe.picture.url, size: "250x150", class: "gravatar") if recipe.picture? %> <!-- we can put the if part at the end, weird -->
+      <%= image_tag(recipe.picture.url, size: "300x230", class: "gravatar") if recipe.picture? %> <!-- we can put the if part at the end, weird -->
     </div>
+    
   </div>
+  
+  <hr/>
+
 <% end %>

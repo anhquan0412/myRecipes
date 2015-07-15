@@ -20,15 +20,26 @@
 
 <% @chefs.each do |chef| %>
   <div class = "row">
-   <div class = "col-md-4 col-md-offset-4 center">
-     <%= link_to gravatar_for(chef, size: 200), chef_path(chef) %>
+   <div class = "col-md-4 col-sm-offset-1 center">
+     <%= link_to gravatar_for(chef, size: 210), chef_path(chef) %>
      
-     <p>
-       <h5>Chef name: <%= chef.chefname %></h5>
-     </p>
-     <hr/>
+     
+     
    </div> 
+   
+   
+   <div class = "col-md-4 well">
+     <p>
+       <h3>Chef name: <%= link_to chef.chefname, chef_path(chef) %></h3>
+       &nbsp&nbsp
+       <hr class = "thick_divider"/>
+       
+       &nbsp&nbsp
+       
+     </p>
+   </div>
+   
   </div>
 
-
+  <hr/>
 <% end %>
