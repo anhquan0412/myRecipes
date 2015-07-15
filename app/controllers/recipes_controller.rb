@@ -14,12 +14,35 @@ class RecipesController < ApplicationController
   
   
   def index
+    
      #  @recipes = Recipe.all.sort_by{ |likes| likes.thumbs_up_total}.reverse #sorting in descending order with number of thumbs up
      #this @recipes will be passed to index page of recipe
      #not a good idea, might cause performance issue when loading ALL recipes
     
     #using paginate
-    @recipes = Recipe.paginate(page: params[:page], per_page: 5) 
+    if (params[:order])
+      temp = params[:order]
+      if (temp == '1') #sort by most recent/default
+        @recipes = Recipe.paginate(page: params[:page], per_page: 5)
+        #flash[:success]="most recent"
+      else
+        if(temp == '2') #sort by likes
+          sql = "SELECT recipes.* FROM recipes   ORDER BY likecount DESC, recipes.updated_at DESC"
+          @recipes = Recipe.paginate_by_sql(sql,page: params[:page], per_page: 5)
+          #flash[:success]="most likes"
+        else #sort by comments
+          sql = "SELECT recipes.* FROM recipes   ORDER BY commentcount DESC, recipes.updated_at DESC"
+          @recipes = Recipe.paginate_by_sql(sql,page: params[:page], per_page: 5)
+          #flash[:success]="most comments"
+        end  
+      end 
+    
+    else
+      @recipes = Recipe.paginate(page: params[:page], per_page: 5)
+      #flash[:success]="default"
+      
+    end
+    
     
   end
   

@@ -24,11 +24,11 @@ class Recipe < ActiveRecord::Base
   
   
   #order the recipe by update time
-  #default_scope -> {order(updated_at: :desc)}
+  default_scope -> {order(updated_at: :desc)}
   
   
   #order the recipe by upvote 
-  default_scope -> {order(likecount: :desc)}
+  #default_scope -> {order(likecount: :desc)}
   
   
   #count number of likes

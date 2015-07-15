@@ -12,6 +12,34 @@
 </ul>
 
 
+
+<!-- sorting -->
+
+<ul class="nav_ul_item pull-right">
+  <div class="dropdown">
+      <%= link_to '#', class: "btn btn-default dropdown-toggle", "data-toggle" => "dropdown" do %>
+        Sort by: <b class="caret"></b>
+      <% end %>
+      
+      <ul class="dropdown-menu">
+        <li><%= link_to "Most Recent", recipes_path(order: 1) %></li>
+      
+      
+      
+         <li><%= link_to "Most Likes", recipes_path(order: 2) %></li>
+     
+      
+       
+         <li><%= link_to "Most Comments", recipes_path(order: 3) %></li>
+      </ul>
+      
+  </div>
+</ul>
+&nbsp
+
+
+
+
 <!-- doing paginate, NEED AN INSTANT VARIABLE TO DO PAGINATE, in this case we have @recipes -->
 <!-- don't have to pass instant variable into will_paginate because there is only 1 instant variable @recipes -->
 <%= will_paginate @recipes%>
@@ -91,7 +119,7 @@
     
     <!-- for the recipe's picture, we use the gravatar class again since we want the pic to be curvy, like chef's pic -->
     <div class="col-md-4">
-      <%= image_tag(recipe.picture.url, size: "250x150", class: "gravatar") if recipe.picture? %> <!-- we can put the if part at the end, weird -->
+      <%= image_tag(recipe.picture.url, size: "280x200", class: "gravatar") if recipe.picture? %> <!-- we can put the if part at the end, weird -->
     </div>
     
   </div>
