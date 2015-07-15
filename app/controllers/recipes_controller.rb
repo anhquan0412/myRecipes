@@ -88,7 +88,20 @@ class RecipesController < ApplicationController
     @comment = Comment.new
     
     #index
-    @comments = @recipe.comments.paginate(page: params[:page], per_page: 5) 
+    
+    #sql =  "SELECT comments.* FROM comments WHERE comments.recipe_id = #{@recipe.id} ORDER BY comments.created_at ASC"
+    
+    #to show the last page of comments always
+    temps = @recipe.comments
+    if (params[:page])
+      @comments = temps.paginate(:page => params[:page], :per_page => 5)
+      
+    else
+      last_page = temps.paginate(:page => params[:page], :per_page => 5).total_pages
+      @comments = temps.paginate(:page => last_page, :per_page => 5)
+    end
+    
+    
     
   end
   

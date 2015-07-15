@@ -8,5 +8,5 @@ class Comment < ActiveRecord::Base
                       length: {minimum: 1, maximum: 200}
   
   
-  default_scope -> {order(created_at: :desc)}
+  #default_scope -> {order(created_at: :desc)}
 end
