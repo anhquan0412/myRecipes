@@ -15,8 +15,13 @@
       <%= will_paginate @recipes %> <!-- we have to specify the instant variables here because this have 
     2 instant variables: @chef and @recipes -->
     <% else %>
-      <h3>You don't have any recipe yet.</h3>
-      <h3><%= link_to "Create a recipe", new_recipe_path, class: "btn btn-warning btn-large" %> </h3>
+      <% if logged_in? && (current_user == @chef) %>
+      
+        <h3>You don't have any recipe yet.</h3>
+        <h3><%= link_to "Create a recipe", new_recipe_path, class: "btn btn-warning btn-large" %> </h3>
+      <% else %>
+        <h3>This chef doesn't have any recipe yet</h3>
+      <% end %>
     <% end %>
     
     
