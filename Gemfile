@@ -1,7 +1,13 @@
 source 'https://rubygems.org'
 
-ruby '2.1.5'
+ruby '2.1.7'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+#extra thing I add
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+gem 'coffee-script-source', '1.8.0'
+#end of adding
+
+
 gem 'rails', '4.1.6'
 
 # Use SCSS for stylesheets
